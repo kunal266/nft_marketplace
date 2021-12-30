@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/workspace/pumpkin_carv/contract/target/wasm32-unknown-unknown/release/build/typenum-55ff30b9565f0355/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/workspace/pumpkin_carv/contract/target/wasm32-unknown-unknown/release/build/typenum-55ff30b9565f0355/out/op.rs
