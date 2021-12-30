@@ -1,4 +1,4 @@
-const CONTRACT_NAME = process.env.CONTRACT_NAME ||'blocklantern'
+const CONTRACT_NAME = process.env.CONTRACT_NAME ||'pumpblock'
 
 function getConfig(env) {
   switch (env) {

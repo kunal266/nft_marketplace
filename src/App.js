@@ -8,7 +8,7 @@ const { networkId } = getConfig(process.env.NODE_ENV || 'development')
 
 export default function App() {
   // use React Hooks to store greeting in component state
-  const [greeting, setGreeting] = React.useState()
+  const [greeting, set_greeting] = React.useState()
 
   // when the user has not yet interacted with the form, disable the button
   const [buttonDisabled, setButtonDisabled] = React.useState(true)
@@ -24,9 +24,9 @@ export default function App() {
       if (window.walletConnection.isSignedIn()) {
 
         // window.contract is set by initContract in index.js
-        window.contract.getGreeting({ accountId: window.accountId })
+        window.contract.get_greeting({ account_id: window.accountId })
           .then(greetingFromContract => {
-            setGreeting(greetingFromContract)
+            set_greeting(greetingFromContract)
           })
       }
     },
@@ -96,7 +96,7 @@ export default function App() {
 
           try {
             // make an update call to the smart contract
-            await window.contract.setGreeting({
+            await window.contract.set_greeting({
               // pass the value that the user entered in the greeting field
               message: newGreeting
             })
@@ -113,7 +113,7 @@ export default function App() {
           }
 
           // update local `greeting` variable to match persisted value
-          setGreeting(newGreeting)
+          set_greeting(newGreeting)
 
           // show Notification
           setShowNotification(true)
@@ -157,7 +157,7 @@ export default function App() {
         </p>
         <ol>
           <li>
-            Look in <code>src/App.js</code> and <code>src/utils.js</code> – you'll see <code>getGreeting</code> and <code>setGreeting</code> being called on <code>contract</code>. What's this?
+            Look in <code>src/App.js</code> and <code>src/utils.js</code> – you'll see <code>get_greeting</code> and <code>set_greeting</code> being called on <code>contract</code>. What's this?
           </li>
           <li>
             Ultimately, this <code>contract</code> code is defined in <code>assembly/main.ts</code> – this is the source code for your <a target="_blank" rel="noreferrer" href="https://docs.near.org/docs/develop/contracts/overview">smart contract</a>.</li>
@@ -183,7 +183,7 @@ function Notification() {
         {window.accountId}
       </a>
       {' '/* React trims whitespace around tags; insert literal space character when needed */}
-      called method: 'setGreeting' in contract:
+      called method: 'set_greeting' in contract:
       {' '}
       <a target="_blank" rel="noreferrer" href={`${urlPrefix}/${window.contract.contractId}`}>
         {window.contract.contractId}
