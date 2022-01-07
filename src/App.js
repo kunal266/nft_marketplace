@@ -1,12 +1,12 @@
 import 'regenerator-runtime/runtime'
-import React from 'react'
+import React,{useEffect} from 'react'
 import { login, logout } from './utils'
 import './global.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import getConfig from './config'
 const { networkId } = getConfig(process.env.NODE_ENV || 'development')
 import Home from "./Components/Home.js";
-import Mintnft from "./Components/Mintnft.mjs";
+import Mintnft from "./Components/Mintnft.js";
 import Mynft from "./Components/mynft.js";
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import {
@@ -16,12 +16,25 @@ import {
   Link,
   Routes
 } from "react-router-dom";
-import mynft from './Components/mynft';
+import * as nearAPI from 'near-api-js';
 export default function App() {
+  const GAS = "200000000000000";
+  const deposit = nearAPI.utils.format.parseNearAmount("0.1");
 
+  const bruh = async () => {  
+    // const outputt = await window.contract.nft_metadata();
+    // console.log(outputt);
+    // if (outputt === null){
+    await window.contract.new_default_meta({
+      "owner_id":window.accountId
+    },GAS)
+    console.log("contract initialized")
+  // }
+  }
 
   return (
     <div style={{minHeight:"100vh"}}>
+      
     <Router>
     <Navbar bg="light" expand="lg">
       <Container>
@@ -30,6 +43,7 @@ export default function App() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mx-auto"></Nav>
           <Nav>
+          <Nav.Link href="/" onClick={()=>bruh}>Initialize Contract</Nav.Link>
             <Nav.Link href="/mintnft">Mint NFT</Nav.Link>
             <Nav.Link href="/mynft">My NFT</Nav.Link>
           <Nav.Link >{window.accountId === "" ? "User" : window.accountId}</Nav.Link>
