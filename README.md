@@ -6,7 +6,7 @@ This [React] app was initialized with [create-near-app]
 `rustup target add wasm32-unknown-unknown`
 
 `npm install -g near-cli near-api-js`
-
+`create wallet on ` [near wallet](https://wallet.testnet.near.org/)
 `npm install nft.storage`
 ### `create account on` [nft.storage](https://nft.storage) `and copy API ID to store it in your storage`
 `add the api key to Mintnft.js file in src/component`
@@ -14,7 +14,8 @@ This [React] app was initialized with [create-near-app]
 `yarn build`
 
 `yarn start`
-
+`After Starting we have to initiliaze the contract, Use console to track the progress`
+`after loging in, we can start minting the NFTS`
 
 Quick Start
 ===========
