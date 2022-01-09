@@ -21,16 +21,28 @@ export default function App() {
   const GAS = "200000000000000";
   const deposit = nearAPI.utils.format.parseNearAmount("0.1");
 
-  const bruh = async () => {  
+  const bruh = async (e) => {  
     // const outputt = await window.contract.nft_metadata();
     // console.log(outputt);
     // if (outputt === null){
+    e.preventDefault();
     await window.contract.new_default_meta({
       "owner_id":window.accountId
     },GAS)
     console.log("contract initialized")
   // }
   }
+  useEffect(async ()=>{
+    try {
+    const outputt = await window.contract.nft_metadata();
+    console.log(outputt);}
+    catch {
+      await window.contract.new_default_meta({
+        "owner_id":window.accountId
+      },GAS)
+      console.log("contract initialized")
+    }
+  },[])
 
   return (
     <div style={{minHeight:"100vh"}}>
