@@ -4,12 +4,18 @@ pumpblock
 This [React] app was initialized with [create-near-app]
 
 `rustup target add wasm32-unknown-unknown`
+
 `npm install -g near-cli near-api-js`
+
 `npm install nft.storage`
-## `create account on nft.storage[nft.storage] and copy API ID to store it in your storage`
-`add the api key to Mintnft.js file in src/component
+
+### `create account on nft.storage[nft.storage] and copy API ID to store it in your storage`
+`add the api key to Mintnft.js file in src/component`
+
 `yarn build`
+
 `yarn start`
+
 
 Quick Start
 ===========
