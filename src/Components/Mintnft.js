@@ -41,13 +41,25 @@ const Mintnft = () => {
   }
   const deposit = nearAPI.utils.format.parseNearAmount("0.1");
   const GAS = "200000000000000";
+  var characters = "ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";  
+              
+            //specify the length for the new string  
+    var lenString = 7;  
+    var randomstring = '';  
+  
+            //loop to select a new character in each iteration  
+    for (var i=0; i<lenString; i++) {  
+        var rnum = Math.floor(Math.random() * characters.length);  
+        randomstring += characters.substring(rnum, rnum+1);  
+    }  
+
  const  mintstr = async (e)=>{
    console.log("minstr woking");
   e.preventDefault();
   const metadata = await client.store({
   name: title.current.value,
   description: desc.current.value,
-  image: new File([filedata], title.current.value+'.jpg', { type: 'image/jpg' })
+  image: new File([filedata], randomstring+'.jpg', { type: 'image/jpg' })
   });
   // const metadata = {
   //   "ipnft": "bafybeibw5mxibhaqo5gzmkanei7hugdfmbypyj6gib2ilibysg26eizjla",

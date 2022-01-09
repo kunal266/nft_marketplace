@@ -29,13 +29,14 @@ export default function App() {
     await window.contract.new_default_meta({
       "owner_id":window.accountId
     },GAS)
-    console.log("contract initialized")
+    console.log("contract initialized with ",window.accountId);
   // }
   }
   useEffect(async ()=>{
     try {
     const outputt = await window.contract.nft_metadata();
-    console.log(outputt);}
+    console.log(outputt);
+  console.log("contract is set to bruh")}
     catch {
       await window.contract.new_default_meta({
         "owner_id":window.accountId
