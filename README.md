@@ -8,8 +8,7 @@ This [React] app was initialized with [create-near-app]
 `npm install -g near-cli near-api-js`
 
 `npm install nft.storage`
-
-### `create account on [nft.storage link](https://nft.storage/) and copy API ID to store it in your storage`
+### `create account on` [nft.storage link](https://nft.storage) `and copy API ID to store it in your storage`
 `add the api key to Mintnft.js file in src/component`
 
 `yarn build`
