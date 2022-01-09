@@ -6,6 +6,7 @@ This [React] app was initialized with [create-near-app]
 `rustup target add wasm32-unknown-unknown`
 
 `npm install -g near-cli near-api-js`
+
 `create wallet on ` [near wallet](https://wallet.testnet.near.org/)
 
 `npm install nft.storage`
