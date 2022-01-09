@@ -7,6 +7,7 @@ This [React] app was initialized with [create-near-app]
 
 `npm install -g near-cli near-api-js`
 `create wallet on ` [near wallet](https://wallet.testnet.near.org/)
+
 `npm install nft.storage`
 ### `create account on` [nft.storage](https://nft.storage) `and copy API ID to store it in your storage`
 `add the api key to Mintnft.js file in src/component`
