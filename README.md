@@ -14,7 +14,9 @@ This [React] app was initialized with [create-near-app]
 `yarn build`
 
 `yarn start`
+
 `After Starting we have to initiliaze the contract, Use console to track the progress`
+
 `after loging in, we can start minting the NFTS`
 
 Quick Start
