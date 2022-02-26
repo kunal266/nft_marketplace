@@ -1,7 +1,7 @@
 import React, { useState,useRef } from "react";
 import { NFTStorage, File } from 'nft.storage/dist/bundle.esm.min.js';
 import fs from "fs";
-const apiKey = "<YOUR_API_KEY>"
+const apiKey = process.env.REACT_APP_API_KEY
 const client = new NFTStorage({ token: apiKey })
 import * as nearAPI from 'near-api-js';
 const Mintnft = () => {
