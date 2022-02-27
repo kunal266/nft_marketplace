@@ -32,3 +32,4 @@ yarn-error.log*
 contract/target
 
 .env
+go-ipfs_v0.12.0_linux-amd64.tar.gz
