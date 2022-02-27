@@ -2,8 +2,36 @@ import React, { useState,useEffect } from 'react';
 import {Tab} from "bootstrap";
 import {Table,Container,Button} from "react-bootstrap";
 const Home = props => {
+    var nftList = [];
+    const [statelist,setstatelist] = useState(null);
+    const [counter,setcounter] = useState(null);
     useEffect(() => {
-        const url = "https://api.nft.storage/?after=2020-07-27T17%3A32%3A28Z&limit=10";
+        
+        const cid_call = async(bruh) => {
+            try{
+            const resp = await fetch(bruh,{
+                method:"GET",
+                header:{"accept": "application/json"}
+            })
+            const respt = await resp.json();
+            // console.log(respt);
+            const temp = ["https://ipfs.io/ipfs/"+respt.image.slice(7),respt.name,respt.description];
+            // console.log(temp);
+            nftList.push(temp)
+            if (nftList.length){
+                // console.log(nftList)
+                setstatelist(nftList)
+                setcounter(nftList.length)
+                // console.log(statelist)
+            }
+            // console.log(statelist)
+            // console.log(nftList);
+            return respt}
+            catch (error) {
+                console.log("error", error);
+              }
+        }
+        const url = "https://api.nft.storage/?after=2020-07-27T17%3A32%3A28Z&limit=20";
         const fetchData = async () => {
           try {
             const response = await fetch(url,{
@@ -12,50 +40,51 @@ const Home = props => {
               });
             const json = await response.json();
 
-            console.log(json);
-          } catch (error) {
+            // console.log(json);
+            var arr = [];
+            Object.keys(json.value).forEach(function(key) {
+            // console.log(json.value[key].cid)
+            const cid_url = "https://ipfs.io/ipfs/" +json.value[key].cid +"/metadata.json";
+            cid_call(cid_url);
+            
+            // console.log(nftList)
+            // console.log(statelist);
+            });
+            const test = await setstatelist(nftList);
+          }
+           catch (error) {
             console.log("error", error);
           }
         };
-    
+        
         fetchData();
+        
     }, []);
 //     const promptList = ["Who would win in Smash Bros?",
 // "Who is the better actor",];
-const [nftList,setnftList] = useState(null)
-// nftList = [["https://img.redbull.com/images/c_crop,x_0,y_0,h_1080,w_1620/c_fill,w_1500,h_1000/q_auto,f_auto/redbullcom/2017/08/29/03820845-b090-444f-86d1-e5259d11482f/most-heroic-pokemon.jpg.jpg","Dragonite","20N"],
-// ["https://www.gamebyte.com/wp-content/uploads/2018/08/Pokemon.jpg","Ash and pikachu"," 69N"],
-// ["https://cdn.vox-cdn.com/thumbor/s9klxW75sFZASNdvlmRqpTancF8=/171x164:1219x754/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/49858761/Screen_Shot_2016-06-14_at_6.23.47_PM.0.0.png","random","200N"],["https://img.redbull.com/images/c_crop,x_0,y_0,h_1080,w_1620/c_fill,w_1500,h_1000/q_auto,f_auto/redbullcom/2017/08/29/03820845-b090-444f-86d1-e5259d11482f/most-heroic-pokemon.jpg.jpg","Dragonite","20N"],
-// ["https://www.gamebyte.com/wp-content/uploads/2018/08/Pokemon.jpg","Ash and pikachu"," 69N"],
-// ["https://cdn.vox-cdn.com/thumbor/s9klxW75sFZASNdvlmRqpTancF8=/171x164:1219x754/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/49858761/Screen_Shot_2016-06-14_at_6.23.47_PM.0.0.png","random","200N"],["https://img.redbull.com/images/c_crop,x_0,y_0,h_1080,w_1620/c_fill,w_1500,h_1000/q_auto,f_auto/redbullcom/2017/08/29/03820845-b090-444f-86d1-e5259d11482f/most-heroic-pokemon.jpg.jpg","Dragonite","20N"],
-
-// ["https://www.gamebyte.com/wp-content/uploads/2018/08/Pokemon.jpg","Ash and pikachu"," 69N"],
-// ["https://cdn.vox-cdn.com/thumbor/s9klxW75sFZASNdvlmRqpTancF8=/171x164:1219x754/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/49858761/Screen_Shot_2016-06-14_at_6.23.47_PM.0.0.png","random","200N"]]
-
 return (
         <Container style={{minHeight:"100vh",marginTop:'5vh'}} className='justify-content-center  d-flex flex-wrap '>
-                
-                        {/* {
-                            nftList.map((el,index)=>{
-                                //    console.log(el[0])
-                                   return(
-                                       <div key={index} style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        padding: '2vw',
-                                        height:'20vh',
-                                        alignItems:'center',
-                                        textAlign:"center"
-                                    }} className="mx-auto flex-column d-flex justify-content-center align-items-center" >
-                                           <img src={el[0]} style = {{maxHeight:"40vh",maxWidth:"25vh"}} />
-                                           <div>{el[1]}</div>
-                                           <div>{el[2]}</div>
-                                       </div>
-                                   )
+                       {statelist===null?"loading...":
+                       statelist.map((el,index)=>{
+            //    console.log(el[0])
+               return(
+                   <div key={index} style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    padding: '2vw',
+                    height:'20vh',
+                    alignItems:'center',
+                    textAlign:"center",
+                    margin:"2vw"
+                }} className="mx-auto flex-column d-flex justify-content-center align-items-center" >
+                    {/* {console.log(el[0],el[1],el[2])} */}
+                       <img src={el[0]} style = {{maxHeight:"40vh",maxWidth:"25vh"}} />
+                       <div>{el[1]}</div>
+                       <div>{el[2]}</div>
+                   </div>
+               )
 
-                            })
-                        } */}
-                        hi
+        })}
         </Container>
 
     );

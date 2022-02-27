@@ -13,8 +13,8 @@ const Mynft = props => {
 console.log("bft_bruh",nftbruh);
     return (
 <Container style={{minHeight:"100vh",marginTop:'5vh'}} className='justify-content-center  d-flex flex-wrap '>
-                
-                {nftbruh===null?"loading":
+{console.log("container started")}
+                {nftbruh===null?"loading...":
                     nftbruh.map((el,index)=>{
                            console.log(el)
                            return(
